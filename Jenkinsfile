@@ -1,5 +1,5 @@
-String appName = 'vezio-core'
-String repoUrl = 'git@bitbucket.org:vezio/vezio.git'
+String appName = 'am'
+String repoUrl = 'https://github.com/amankumar8/mytest.git'
 String repoCreds = '99e2a1ec-9cda-4eef-8cd6-b98b3f004272'
 String settingsPath = 'config/settings/production.json'
 String runtimeModules = 'babel-runtime braintree-web currency-codes iban pdfmake nouislider braintree google-auth-library fibers moment moment-business-days dropzone react react-dom prop-types lodash react-grid-layout parse-formdata'
@@ -19,8 +19,7 @@ def notifyBuild(String buildStatus) {
         colorCode = '#A63636'
     }
 
-    // Send notifications
-    slackSend (channel: "#vezio-core", color: colorCode, message: summary)
+   
 }
 
 properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '30', artifactNumToKeepStr: '10', daysToKeepStr: '120', numToKeepStr: '10']]]);
@@ -67,7 +66,7 @@ try {
         stage('SonarQube analysis') {
             dir('source') {
                 def scannerHome = tool 'sonscanner';
-                withSonarQubeEnv('sonar.vezio.company') {
+                withSonarQubeEnv('sonar.am.k') {
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${appName} -Dsonar.javascript.lcov.reportPaths=$WORKSPACE/source/.coverage/lcov.info -Dsonar.sources=. -Dsonar.exclusions=\"node_modules/**/*\""
                 }
             }
